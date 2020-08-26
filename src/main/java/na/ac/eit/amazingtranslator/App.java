@@ -1,7 +1,5 @@
 package na.ac.eit.amazingtranslator;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -12,80 +10,17 @@ public class App
 {
     public static void main( String[] args )
     {
-        List<String> frenchTranslations=new ArrayList<>();
-        frenchTranslations.add("Un");
-        frenchTranslations.add("Deux");
-        frenchTranslations.add("Trois");
-        frenchTranslations.add("Quatre");
-        frenchTranslations.add("Cinq");
-        frenchTranslations.add("Six");
-        frenchTranslations.add("Sept");
-        frenchTranslations.add("Huit");
-        frenchTranslations.add("Nuef");
-        frenchTranslations.add("Dix");
-        frenchTranslations.add("Onze");
-        frenchTranslations.add("Douze");
-        frenchTranslations.add("Treize");
-        frenchTranslations.add("Quatorze");
-        frenchTranslations.add("Quinze");
-        frenchTranslations.add("Seize");
-        frenchTranslations.add("Dix-Sept");
-        frenchTranslations.add("Dix-Huit");
-        frenchTranslations.add("Dix-Nuef");
-        frenchTranslations.add("Vingt");
-        frenchTranslations.add("Vingt et un");
-        frenchTranslations.add("Vingt-deux");
-        frenchTranslations.add("Vingt-trois");
-        frenchTranslations.add("Vingt-quatre");
-        frenchTranslations.add("Vingt-cinq");
-        frenchTranslations.add("Vingt-six");
-        frenchTranslations.add("Vingt-sept");
-        frenchTranslations.add("Vingt-huit");
-        frenchTranslations.add("Vingt-neuf");
-        frenchTranslations.add("Trente");
-        //Finish This
-
-        List<String> germanTranslations=new ArrayList<>();
-        germanTranslations.add("Eiz");
-        germanTranslations.add("Zwei");
-        germanTranslations.add("Drei");
-        germanTranslations.add("Vier");
-        germanTranslations.add("Funf");
-        germanTranslations.add("Sechs");
-        germanTranslations.add("Sieben");
-        germanTranslations.add("Acht");
-        germanTranslations.add("Neun");
-        germanTranslations.add("Zehn");
-        germanTranslations.add("Elf");
-        germanTranslations.add("Zwolf");
-        germanTranslations.add("Dreizehn");
-        germanTranslations.add("Vierzhen");
-        germanTranslations.add("Funfzehn");
-        germanTranslations.add("Sechzhen");
-        germanTranslations.add("Siebzhen");
-        germanTranslations.add("Achtzhen");
-        germanTranslations.add("Neunzehn");
-        germanTranslations.add("Zwanzig");
-        germanTranslations.add("Einundzwanzig");
-        germanTranslations.add("Zweiundzwanzig");
-        germanTranslations.add("Dreiundzwanzig");
-        germanTranslations.add("Vierundzwanzig");
-        germanTranslations.add("Funfundzwanzig");
-        germanTranslations.add("Sechsundzwanzig");
-        germanTranslations.add("Siebenundzwanzig");
-        germanTranslations.add("Achtundzwanzig");
-        germanTranslations.add("Neunundzwanzig");
-        germanTranslations.add("Dreibig");
-        //Finish This
+       TranslationDictionaries dictionaries = new TranslationDictionaries();
+       dictionaries.initializeDictionaries();
 
         String userAnswer=null;
+
+
 
         do
         {
 
-            System.out.println("Provide a number from 1-30");
-            Scanner scanner = new Scanner(System.in);
-            String NumberAsaString = scanner.nextLine();
+
 
             Integer number = null;
             //System.out.println(NumberAsaString);
@@ -113,12 +48,13 @@ public class App
 
             //Check that the option is 1 or 2
 
-            if (option == 1) {
-                System.out.println(frenchTranslations.get(number - 1));
-            } else if (option == 2) {
-                System.out.println(germanTranslations.get(number - 1));
-            } else {
-                System.out.println("Only French or German");
+
+            try {
+                System.out.println(dictionaries.getTranslationOf(number, option));
+            } catch (LanguageNotSupportedException e) {
+                System.out.println("only French and German are supported");
+            } catch (NumberOutOfRangeException e) {
+                System.out.println("Only numbers between 1-30");
             }
 
             // restart & Quit
@@ -126,6 +62,9 @@ public class App
             userAnswer=scanner.nextLine();
         }
         while (userAnswer.equalsIgnoreCase("Y"));
+
+
+        }
 
 
 
